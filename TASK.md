@@ -1,1 +1,1 @@
-add a priority flag to todos
+what mode are you in and what are you working on?
