@@ -14,8 +14,8 @@ fi
 git add -A 2>/dev/null || true
 git reset HEAD -- spec/ 2>/dev/null || true
 if ! git diff --cached --quiet; then
-  SUMMARY=$(git diff --cached --stat | head -1 | sed 's/^ *//')
-  git commit -m "impl: $SUMMARY" --no-verify 2>/dev/null || true
+  MSG=$(bash .claude/hooks/summarize-diff.sh impl)
+  git commit -m "$MSG" --no-verify 2>/dev/null || true
 fi
 
 echo "SPEC_MODE" > "$MODE_FILE"

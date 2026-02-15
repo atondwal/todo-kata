@@ -13,8 +13,8 @@ fi
 # Commit any uncommitted spec changes
 git add spec/ 2>/dev/null || true
 if ! git diff --cached --quiet; then
-  SUMMARY=$(git diff --cached --stat | head -1 | sed 's/^ *//')
-  git commit -m "spec: $SUMMARY" --no-verify 2>/dev/null || true
+  MSG=$(bash .claude/hooks/summarize-diff.sh spec)
+  git commit -m "$MSG" --no-verify 2>/dev/null || true
 fi
 
 echo "IMPL_MODE" > "$MODE_FILE"
